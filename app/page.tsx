@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { t } from "@/lib/i18n";
+import t from "@/lib/i18n";
 
 type MetricCardProps = {
   title: string;
@@ -117,3 +117,4 @@ export default function HomePage() {
     </main>
   );
 }
+
