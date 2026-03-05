@@ -142,4 +142,29 @@ export function setLangClient(lang: Lang) {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(LANG_STORAGE_KEY, lang);
   document.cookie = `${LANG_COOKIE}=${lang}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+
+}
+
+
+// lib/i18n.ts 末尾追加（不要删你原来的内容）
+
+// 读取 cookie（client）
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return m ? decodeURIComponent(m[2]) : undefined;
+}
+
+// 给页面用的“当前语言文案对象”
+// 你页面里写的是：import t from "@/lib/i18n";
+// 所以这里必须 default export 一个对象
+export default function getCopy() {
+  const lang = normalizeLang(
+    typeof window === "undefined"
+      ? "zh"
+      : window.localStorage.getItem(LANG_STORAGE_KEY) || getCookie(LANG_COOKIE) || "zh"
+  );
+
+  // 返回 copy.zh 或 copy.en 这类对象
+  return copy[lang];
 }
