@@ -1,3 +1,4 @@
+// lib/llm.ts
 import { Diagnosis, Metrics } from "./schema";
 
 function clamp(n: number, a: number, b: number) {
@@ -14,7 +15,6 @@ function fmtNum(x: number): string {
 }
 
 export function generateDiagnosis(metrics: Metrics, lang: "zh" | "en"): Diagnosis {
-  // --- simple scoring ---
   let score = 70;
 
   // Ad ROI
@@ -23,7 +23,7 @@ export function generateDiagnosis(metrics: Metrics, lang: "zh" | "en"): Diagnosi
     else if (metrics.adRoi < 2.0) score -= 10;
     else score += 5;
   } else {
-    score -= 5; // unknown
+    score -= 5;
   }
 
   // Conversion
@@ -50,11 +50,9 @@ export function generateDiagnosis(metrics: Metrics, lang: "zh" | "en"): Diagnosi
   score = clamp(Math.round(score), 0, 100);
 
   const isZH = lang === "zh";
-
   const summary: string[] = [];
   const topProblems: { title: string; why: string; metricHint?: string }[] = [];
 
-  // problem: ad roi low
   if (metrics.adRoi !== null && metrics.adRoi < 2.0) {
     topProblems.push({
       title: isZH ? "广告 ROI 偏低" : "Ad ROI is low",
@@ -65,7 +63,6 @@ export function generateDiagnosis(metrics: Metrics, lang: "zh" | "en"): Diagnosi
     });
   }
 
-  // problem: conversion low
   if (metrics.conversionRate !== null && metrics.conversionRate < 0.03) {
     topProblems.push({
       title: isZH ? "转化率偏低" : "Conversion rate is low",
@@ -76,7 +73,6 @@ export function generateDiagnosis(metrics: Metrics, lang: "zh" | "en"): Diagnosi
     });
   }
 
-  // problem: inventory slow
   if (metrics.inventoryDays !== null && metrics.inventoryDays > 60) {
     topProblems.push({
       title: isZH ? "库存周转慢" : "Inventory turns slowly",
@@ -87,7 +83,6 @@ export function generateDiagnosis(metrics: Metrics, lang: "zh" | "en"): Diagnosi
     });
   }
 
-  // profit margin low (only if profit exists)
   if (metrics.profitMargin !== null && metrics.profitMargin < 0.15) {
     topProblems.push({
       title: isZH ? "利润率偏低" : "Profit margin is low",
@@ -107,10 +102,7 @@ export function generateDiagnosis(metrics: Metrics, lang: "zh" | "en"): Diagnosi
     });
   }
 
-  summary.push(
-    isZH ? `健康度评分：${score}/100` : `Health score: ${score}/100`
-  );
-
+  summary.push(isZH ? `健康度评分：${score}/100` : `Health score: ${score}/100`);
   if (metrics.adRoi !== null) summary.push((isZH ? "广告ROI" : "Ad ROI") + `：${metrics.adRoi.toFixed(2)}`);
   if (metrics.conversionRate !== null) summary.push((isZH ? "转化率" : "CVR") + `：${fmtPct(metrics.conversionRate)}`);
   if (metrics.inventoryDays !== null) summary.push((isZH ? "库存周转(天)" : "Inventory days") + `：${fmtNum(metrics.inventoryDays)}`);
