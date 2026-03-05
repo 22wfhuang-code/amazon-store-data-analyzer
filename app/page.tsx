@@ -1,5 +1,5 @@
 import Link from "next/link";
-import t from "@/lib/i18n";
+import { copy } from "@/lib/i18n";
 
 type MetricCardProps = {
   title: string;
@@ -26,10 +26,12 @@ function MetricCard({ title, rule, actions }: MetricCardProps) {
 }
 
 export default function HomePage() {
+
+  const t = copy.zh;
+
   return (
     <main className="max-w-4xl mx-auto p-6 space-y-8">
 
-      {/* 标题 */}
       <section>
         <h1 className="text-3xl font-bold mb-3">
           Amazon Store Data Analyzer
@@ -48,7 +50,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 规则解释 */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <div className="border rounded-lg p-6">
@@ -91,7 +92,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 隐私说明 */}
         <div className="border rounded-lg p-6">
 
           <div className="text-lg font-semibold mb-3">
@@ -117,4 +117,3 @@ export default function HomePage() {
     </main>
   );
 }
-
