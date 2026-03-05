@@ -1,4 +1,26 @@
 // lib/schema.ts
+
+// ===== Types used by LLM diagnosis =====
+export type Metrics = {
+  adRoi: number | null;
+  conversionRate: number | null;
+  profitMargin: number | null;
+  inventoryDays: number | null;
+
+  // 你如果还有别的指标，允许扩展
+  [k: string]: any;
+};
+
+export type Diagnosis = {
+  lang: "zh" | "en";
+  score: number;
+  summary: string[];
+  topProblems: { title: string; why: string; metricHint?: string }[];
+  metrics: Metrics;
+  actionPlan: { day: string; actions: string[] }[];
+};
+
+// ===== CSV helper (你之前放在 schema 里也行，先不动结构) =====
 export function parseCsvToRows(csv: string): Record<string, any>[] {
   const lines = csv
     .split(/\r?\n/)
