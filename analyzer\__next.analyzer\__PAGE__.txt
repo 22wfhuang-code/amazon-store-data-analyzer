@@ -1,0 +1,9 @@
+1:"$Sreact.fragment"
+2:I[47257,["/amazon-store-data-analyzer/_next/static/chunks/ff1a16fafef87110.js","/amazon-store-data-analyzer/_next/static/chunks/a2dfb6fc5208ab9b.js"],"ClientPageRoot"]
+3:I[65328,["/amazon-store-data-analyzer/_next/static/chunks/40b370959f48466f.js","/amazon-store-data-analyzer/_next/static/chunks/ba549c639b6f73f6.js"],"default"]
+6:I[97367,["/amazon-store-data-analyzer/_next/static/chunks/ff1a16fafef87110.js","/amazon-store-data-analyzer/_next/static/chunks/a2dfb6fc5208ab9b.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+0:{"buildId":"pHG4gOI8ukJ6CM7FYPutl","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/amazon-store-data-analyzer/_next/static/chunks/40b370959f48466f.js","async":true}],["$","script","script-1",{"src":"/amazon-store-data-analyzer/_next/static/chunks/ba549c639b6f73f6.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+4:{}
+5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
+8:null
